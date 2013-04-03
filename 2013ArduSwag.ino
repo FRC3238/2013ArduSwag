@@ -161,20 +161,58 @@ void climbing() {
         strip.show();
         j++;
     }
+    {
+        static unsigned long lasttime = 0;
+        if (millis() - lasttime > 100) {
+            lasttime = millis();
+            static unsigned int i = 0;
+            switch(i) {
+            case 1: for (uint8_t j=0; j<numShooterLights; j++) digitalWrite(shooterLightNums[j], HIGH); break;
+            case 2: digitalWrite(shooterLightNums[0],  LOW); break;
+            case 3: digitalWrite(shooterLightNums[1],  LOW); break;
+            case 4: digitalWrite(shooterLightNums[2],  LOW); break;
+            case 5: digitalWrite(shooterLightNums[3],  LOW); break;
+            case 6: digitalWrite(shooterLightNums[0], HIGH); break;
+            case 7: digitalWrite(shooterLightNums[1], HIGH); break;
+            case 8: digitalWrite(shooterLightNums[2], HIGH); break;
+            case 9: digitalWrite(shooterLightNums[3], HIGH); break;
+            }
+            i = i >= 9? 0 : i+1;
+        }
+    }
 }
 
 void victory() {
-    
     static unsigned long lasttime = 0;
     if (millis() - lasttime > 5) {
         lasttime = millis();
         static unsigned int j = 0;
 
         for(unsigned int i=0; i<strip.numPixels(); i++) {
-            strip.setPixelColor(i, Wheel((i+j) & 255));
+            strip.setPixelColor(i, Wheel((i+3*j) & 255));
         }
         strip.show();
         j++;
+    }
+
+    {
+        static unsigned long lasttime = 0;
+        if (millis() - lasttime > 100) {
+            lasttime = millis();
+            static unsigned int i = 0;
+            switch(i) {
+            case 1: for (uint8_t j=0; j<numShooterLights; j++) digitalWrite(shooterLightNums[j], HIGH); break;
+            case 2: digitalWrite(shooterLightNums[0],  LOW); break;
+            case 3: digitalWrite(shooterLightNums[1],  LOW); break;
+            case 4: digitalWrite(shooterLightNums[2],  LOW); break;
+            case 5: digitalWrite(shooterLightNums[3],  LOW); break;
+            case 6: digitalWrite(shooterLightNums[0], HIGH); break;
+            case 7: digitalWrite(shooterLightNums[1], HIGH); break;
+            case 8: digitalWrite(shooterLightNums[2], HIGH); break;
+            case 9: digitalWrite(shooterLightNums[3], HIGH); break;
+            }
+            i = i >= 9? 0 : i+1;
+        }
     }
 }
 
